@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Showcase | Group 3</title>
+    <link rel="icon" type="image/png" href="cdm_logo.png">
+    <link href="https://unpkg.com/lucide-static/font/lucide.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --accent: #888888;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary);
+            color: var(--primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+        
+        .logo:hover img {
+            filter: grayscale(0%);
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after, .nav-links a.active:after {
+            width: 100%;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            display: none;
+            min-height: 80vh;
+        }
+        
+        section.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            letter-spacing: -1px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--dark-gray);
+        }
+        
+        /* Card Styles */
+        .card {
+            background: var(--secondary);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--medium-gray);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Presentation Section */
+        .js-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature {
+            background: var(--secondary);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--medium-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            padding: 1rem;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+        }
+        
+        /* Mini Projects Section */
+        .banner {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--light-gray);
+            border-radius: 8px;
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .banner span {
+            display: inline-block;
+            padding: 10px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: scrollText 15s linear infinite;
+        }
+
+        @keyframes scrollText {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            background: var(--secondary);
+            color: var(--primary);
+            border: 1px solid var(--medium-gray);
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--primary);
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .mini-project-content {
+            background: var(--secondary);
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            display: none;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .mini-project-content.active {
+            display: block;
+        }
+
+        input, select, button {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--medium-gray);
+            text-align: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            background: var(--primary);
+            color: var(--secondary);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: var(--dark-gray);
+            transform: translateY(-2px);
+        }
+
+        p.result {
+            margin-top: 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: var(--light-gray);
+        }
+        
+        /* Real Apps Section */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .app-card {
+            background: var(--secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .app-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+        
+        .app-card:hover .app-image {
+            filter: grayscale(0%);
+        }
+        
+        .app-content {
+            padding: 1.8rem;
+        }
+        
+        .app-link {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .app-link:hover {
+            background-color: var(--dark-gray);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* Decorative Elements */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--medium-gray), transparent);
+            margin: 2rem 0;
+        }
+        
+        .accent-line {
+            height: 4px;
+            width: 60px;
+            background-color: var(--primary);
+            margin: 1.5rem auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiByeD0iNTAiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTM1IDM1SDUwVjUwSDM1VjM1WiIgZmlsbD0iIzAwMDAwMCIvPgo8cGF0aCBkPSJNNjUgMzVINzVWNTBINjVWMzVaIiBmaWxsPSIjMDAwMDAwIi8+CjxwYXRoIGQ9Ik0zNSA2NUg1MFY3NUgzNVY2NVoiIGZpbGw9IiMwMDAwMDAiLz4KPHBhdGggZD0iTTY1IDY1SDc1Vjc1SDY1VjY1WiIgZmlsbD0iIzAwMDAwMCIvPgo8L3N2Zz4K" alt="JS Showcase Logo">
+                    <div class="logo-text">JS Showcase</div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-target="presentation">Presentation</a></li>
+                    <li><a href="#" class="nav-link" data-target="mini-project">Mini Projects</a></li>
+                    <li><a href="#" class="nav-link" data-target="real-apps">Real Applications</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="presentation" class="active">
+            <div class="section-header">
+                <h1>JavaScript in Modern Web Development</h1>
+                <p>Explore how JavaScript transforms static websites into dynamic, interactive experiences</p>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="card">
+                <h2>The Power of JavaScript</h2>
+                <p>JavaScript is the programming language of the web, enabling interactive features, dynamic content updates, and complex web applications that run directly in your browser.</p>
+                
+                <div class="js-features">
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>DOM Manipulation</h3>
+                        <p>JavaScript can access and modify the Document Object Model (DOM), allowing dynamic updates to content, structure, and styling without page reloads.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Event Handling</h3>
+                        <p>JavaScript responds to user interactions like clicks, keypresses, and form submissions to create responsive, interactive experiences.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📡</div>
+                        <h3>Asynchronous Operations</h3>
+                        <p>With AJAX and Fetch API, JavaScript can retrieve data from servers in the background without interrupting the user experience.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💾</div>
+                        <h3>Client-Side Storage</h3>
+                        <p>JavaScript can store data locally in the browser using localStorage, sessionStorage, or IndexedDB for offline functionality.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Enhancing User Experience</h2>
+                <p>JavaScript transforms static web pages into dynamic applications by:</p>
+                <ul>
+                    <li>Providing immediate feedback to user actions</li>
+                    <li>Validating form inputs in real-time</li>
+                    <li>Creating smooth animations and visual effects</li>
+                    <li>Loading content dynamically without page refreshes</li>
+                    <li>Remembering user preferences and data</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="mini-project">
+            <div class="section-header">
+                <h1>Interactive Mini Projects</h1>
+                <p>Explore these JavaScript-powered applications created by Group 3</p>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="card">
+                <!-- Animated Banner -->
+                <div class="banner">
+                    <span>✨ GROUP 3 — FUNCTION MINI PROJECT ✨ | Colegio de Montalban | BSIT 2B 2nd Year </span>
+                </div>
+
+                <h2>JavaScript Function Demonstrations</h2>
+
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="showTab('calc')"><i class="lucide-calculator"></i>Calculator</button>
+                    <button class="tab-btn" onclick="showTab('grade')"><i class="lucide-book"></i>Grades</button>
+                    <button class="tab-btn" onclick="showTab('temp')"><i class="lucide-thermometer"></i>Temperature</button>
+                    <button class="tab-btn" onclick="showTab('bmi')"><i class="lucide-activity"></i>BMI</button>
+                    <button class="tab-btn" onclick="showTab('evenodd')"><i class="lucide-hash"></i>Even/Odd</button>
+                </div>
+
+                <!-- Calculator -->
+                <div id="calc" class="mini-project-content active">
+                    <h3>Function Calculator</h3>
+                    <input type="number" id="n1" placeholder="First number">
+                    <input type="number" id="n2" placeholder="Second number">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                        <button onclick="add()">Add</button>
+                        <button onclick="subtract()">Subtract</button>
+                        <button onclick="multiply()">Multiply</button>
+                        <button onclick="divide()">Divide</button>
+                    </div>
+                    <p id="result1" class="result"></p>
+                </div>
+
+                <!-- Grade Calculator -->
+                <div id="grade" class="mini-project-content">
+                    <h3>Grade Calculator</h3>
+                    <input type="number" id="prelim" placeholder="Prelim Grade">
+                    <input type="number" id="midterm" placeholder="Midterm Grade">
+                    <input type="number" id="final" placeholder="Final Grade">
+                    <button onclick="calculateGrade()">Compute Grade</button>
+                    <p id="result2" class="result"></p>
+                </div>
+
+                <!-- Temperature Converter -->
+                <div id="temp" class="mini-project-content">
+                    <h3>Temperature Converter</h3>
+                    <input type="number" id="tempValue" placeholder="Enter Temperature">
+                    <select id="unit">
+                        <option value="C">Celsius</option>
+                        <option value="F">Fahrenheit</option>
+                        <option value="K">Kelvin</option>
+                    </select>
+                    <button onclick="convertTemp()">Convert Temperature</button>
+                    <p id="result3" class="result"></p>
+                </div>
+
+                <!-- BMI Calculator -->
+                <div id="bmi" class="mini-project-content">
+                    <h3>BMI Calculator</h3>
+                    <input type="number" id="weight" placeholder="Weight (kg)">
+                    <input type="number" id="height" placeholder="Height (m)">
+                    <button onclick="calculateBMI()">Calculate BMI</button>
+                    <p id="result4" class="result"></p>
+                </div>
+
+                <!-- Even or Odd -->
+                <div id="evenodd" class="mini-project-content">
+                    <h3>Even or Odd Checker</h3>
+                    <input type="number" id="num" placeholder="Enter a number">
+                    <button onclick="checkEvenOdd()">Check Number</button>
+                    <p id="result5" class="result"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="real-apps">
+            <div class="section-header">
+                <h1>Real-World JavaScript Applications</h1>
+                <p>Discover how JavaScript powers some of the most popular web applications today</p>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="card">
+                <h2>Industry-Leading Web Applications</h2>
+                <p>These popular platforms rely heavily on JavaScript for their core functionality and user experience:</p>
+                
+                <div class="app-grid">
+                    <div class="app-card">
+                        <div class="app-image" style="background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*_6M2nk6e_1N7dAYvwET8fg.png');"></div>
+                        <div class="app-content">
+                            <h3>Trello</h3>
+                            <p>A project management application that uses JavaScript for its interactive boards, drag-and-drop functionality, and real-time updates.</p>
+                            <a href="https://trello.com" target="_blank" class="app-link">Visit Trello</a>
+                        </div>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-image" style="background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*U9hP5HhWTPM0vzKZR2S7aA.png');"></div>
+                        <div class="app-content">
+                            <h3>Netflix</h3>
+                            <p>The streaming service uses JavaScript for its dynamic interface, content recommendations, and seamless video playback controls.</p>
+                            <a href="https://netflix.com" target="_blank" class="app-link">Visit Netflix</a>
+                        </div>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-image" style="background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*5TZq6pK_4JkHlB8z3Q2Q2A.png');"></div>
+                        <div class="app-content">
+                            <h3>Google Maps</h3>
+                            <p>This mapping service relies on JavaScript for interactive maps, route calculations, and location-based services.</p>
+                            <a href="https://maps.google.com" target="_blank" class="app-link">Visit Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Group 3 | JavaScript Showcase | Colegio de Montalban</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and sections
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked link and corresponding section
+                    this.classList.add('active');
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                    
+                    // Scroll to top of section
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+            
+            // Initialize the mini projects
+            initMiniProjects();
+        });
+
+        // Tab Navigation for Mini Projects
+        function showTab(tabId) {
+            document.querySelectorAll('.mini-project-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.closest('button').classList.add('active');
+        }
+
+        // Initialize Mini Projects
+        function initMiniProjects() {
+            // Calculator Functions
+            window.add = function() {
+                let [a, b] = getValues();
+                document.getElementById("result1").innerHTML = "Sum: " + (a + b);
+            }
+            
+            window.subtract = function() {
+                let [a, b] = getValues();
+                document.getElementById("result1").innerHTML = "Difference: " + (a - b);
+            }
+            
+            window.multiply = function() {
+                let [a, b] = getValues();
+                document.getElementById("result1").innerHTML = "Product: " + (a * b);
+            }
+            
+            window.divide = function() {
+                let [a, b] = getValues();
+                document.getElementById("result1").innerHTML = b !== 0 ? "Quotient: " + (a / b) : "Cannot divide by zero!";
+            }
+            
+            function getValues() {
+                return [parseFloat(document.getElementById("n1").value),
+                        parseFloat(document.getElementById("n2").value)];
+            }
+
+            // Grade Calculator
+            window.calculateGrade = function() {
+                let p = parseFloat(document.getElementById("prelim").value);
+                let m = parseFloat(document.getElementById("midterm").value);
+                let f = parseFloat(document.getElementById("final").value);
+                if (isNaN(p) || isNaN(m) || isNaN(f)) {
+                    document.getElementById("result2").innerHTML = "Please fill all fields.";
+                    return;
+                }
+                let avg = (p + m + f) / 3;
+                let remarks = avg >= 75 ? "PASSED ✅" : "FAILED ❌";
+                document.getElementById("result2").innerHTML = `Average: ${avg.toFixed(2)}<br>Remarks: ${remarks}`;
+            }
+
+            // Temperature Converter
+            window.convertTemp = function() {
+                let temp = parseFloat(document.getElementById("tempValue").value);
+                let unit = document.getElementById("unit").value;
+                if (isNaN(temp)) {
+                    document.getElementById("result3").innerHTML = "Please enter a temperature.";
+                    return;
+                }
+                let result = "";
+                if (unit === "C") {
+                    result = `${temp}°C = ${(temp * 9/5 + 32).toFixed(2)}°F = ${(temp + 273.15).toFixed(2)}K`;
+                } else if (unit === "F") {
+                    result = `${temp}°F = ${((temp - 32) * 5/9).toFixed(2)}°C = ${((temp - 32) * 5/9 + 273.15).toFixed(2)}K`;
+                } else {
+                    result = `${temp}K = ${(temp - 273.15).toFixed(2)}°C = ${((temp - 273.15) * 9/5 + 32).toFixed(2)}°F`;
+                }
+                document.getElementById("result3").innerHTML = result;
+            }
+
+            // BMI Calculator
+            window.calculateBMI = function() {
+                let w = parseFloat(document.getElementById("weight").value);
+                let h = parseFloat(document.getElementById("height").value);
+                if (isNaN(w) || isNaN(h) || h <= 0) {
+                    document.getElementById("result4").innerHTML = "Enter valid weight and height.";
+                    return;
+                }
+                let bmi = w / (h * h);
+                let category = "";
+                if (bmi < 18.5) category = "Underweight";
+                else if (bmi < 25) category = "Normal";
+                else if (bmi < 30) category = "Overweight";
+                else category = "Obese";
+                document.getElementById("result4").innerHTML = `BMI: ${bmi.toFixed(2)} (${category})`;
+            }
+
+            // Even or Odd
+            window.checkEvenOdd = function() {
+                let num = parseInt(document.getElementById("num").value);
+                if (isNaN(num)) {
+                    document.getElementById("result5").innerHTML = "Please enter a number.";
+                    return;
+                }
+                let result = num % 2 === 0 ? "Even Number" : "Odd Number";
+                document.getElementById("result5").innerHTML = result;
+            }
+        }
+    </script>
+</body>
+</html>
