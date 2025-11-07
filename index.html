@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Showcase | Group 3</title>
+    <title>JavaScript Functions | Group 3</title>
     <link rel="icon" type="image/png" href="cdm_logo.png">
     <link href="https://unpkg.com/lucide-static/font/lucide.css" rel="stylesheet">
     <style>
@@ -109,7 +109,7 @@
         
         /* Section Styles */
         section {
-            padding: 5rem 0;
+            padding: 3rem 0;
             display: none;
             min-height: 80vh;
         }
@@ -200,6 +200,56 @@
             padding: 1rem;
             border-radius: 50%;
             background-color: var(--light-gray);
+        }
+        
+        /* Function Presentation Styles */
+        .function-slide {
+            background: var(--secondary);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .function-slide h3 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .code-block {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .code-block code {
+            color: var(--dark-gray);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .parameter-example {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .parameter-box {
+            flex: 1;
+            min-width: 200px;
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--medium-gray);
         }
         
         /* Mini Projects Section */
@@ -310,6 +360,11 @@
             padding: 1rem;
             border-radius: 8px;
             background-color: var(--light-gray);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
         
         /* Real Apps Section */
@@ -367,6 +422,30 @@
             transform: translateY(-2px);
         }
         
+        /* Enhanced Real Apps Styling */
+        .js-explanation {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .js-explanation h4 {
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+        
+        .example-syntax {
+            margin-top: 1.5rem;
+        }
+        
+        .example-syntax h5 {
+            margin-bottom: 0.8rem;
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+        
         /* Footer */
         footer {
             background-color: var(--primary);
@@ -384,6 +463,10 @@
             
             h2 {
                 font-size: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
             }
             
             .nav-links {
@@ -407,6 +490,30 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .card, .function-slide {
+                padding: 1.5rem;
+            }
+            
+            .parameter-example {
+                flex-direction: column;
+            }
+            
+            .parameter-box {
+                width: 100%;
+            }
+            
+            .mini-project-content {
+                padding: 1.5rem;
+            }
+            
+            .js-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         /* Decorative Elements */
@@ -422,6 +529,18 @@
             background-color: var(--primary);
             margin: 1.5rem auto;
         }
+        
+        .group-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .group-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            letter-spacing: 2px;
+        }
     </style>
 </head>
 <body>
@@ -430,12 +549,12 @@
             <nav>
                 <div class="logo">
                     <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiByeD0iNTAiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTM1IDM1SDUwVjUwSDM1VjM1WiIgZmlsbD0iIzAwMDAwMCIvPgo8cGF0aCBkPSJNNjUgMzVINzVWNTBINjVWMzVaIiBmaWxsPSIjMDAwMDAwIi8+CjxwYXRoIGQ9Ik0zNSA2NUg1MFY3NUgzNVY2NVoiIGZpbGw9IiMwMDAwMDAiLz4KPHBhdGggZD0iTTY1IDY1SDc1Vjc1SDY1VjY1WiIgZmlsbD0iIzAwMDAwMCIvPgo8L3N2Zz4K" alt="JS Showcase Logo">
-                    <div class="logo-text">JS Showcase</div>
+                    <div class="logo-text">JS Functions</div>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#" class="nav-link active" data-target="presentation">Presentation</a></li>
+                    <li><a href="#" class="nav-link active" data-target="presentation">Functions</a></li>
                     <li><a href="#" class="nav-link" data-target="mini-project">Mini Projects</a></li>
-                    <li><a href="#" class="nav-link" data-target="real-apps">Real Applications</a></li>
+                    <li><a href="#" class="nav-link" data-target="real-apps">Real Apps</a></li>
                 </ul>
             </nav>
         </div>
@@ -444,49 +563,80 @@
     <main class="container">
         <section id="presentation" class="active">
             <div class="section-header">
-                <h1>JavaScript in Modern Web Development</h1>
-                <p>Explore how JavaScript transforms static websites into dynamic, interactive experiences</p>
+                <h1>JavaScript Functions</h1>
+                <p>Understanding the building blocks of reusable code in JavaScript</p>
                 <div class="accent-line"></div>
             </div>
             
-            <div class="card">
-                <h2>The Power of JavaScript</h2>
-                <p>JavaScript is the programming language of the web, enabling interactive features, dynamic content updates, and complex web applications that run directly in your browser.</p>
-                
-                <div class="js-features">
-                    <div class="feature">
-                        <div class="feature-icon">⚡</div>
-                        <h3>DOM Manipulation</h3>
-                        <p>JavaScript can access and modify the Document Object Model (DOM), allowing dynamic updates to content, structure, and styling without page reloads.</p>
+            <div class="group-header">
+                <div class="group-name">GROUP 3</div>
+            </div>
+            
+            <div class="function-slide">
+                <h3>What is a Function?</h3>
+                <p>A function in JavaScript is a reusable block of code that performs a specific task when needed.</p>
+                <div class="code-block">
+                    <code>function greet() {<br>&nbsp;&nbsp;console.log("Hello, World!");<br>}</code>
+                </div>
+            </div>
+            
+            <div class="function-slide">
+                <h3>Declaring a Function</h3>
+                <p>A function in JavaScript is defined by declaring a block of reusable code with the function keyword.</p>
+                <div class="code-block">
+                    <code>function functionName() {<br>&nbsp;&nbsp;// Code to be executed<br>}</code>
+                </div>
+            </div>
+            
+            <div class="function-slide">
+                <h3>Calling a Function</h3>
+                <p>Functions don't execute automatically. You need to call (invoke) them to run the code inside.</p>
+                <div class="code-block">
+                    <code>function greet() {<br>&nbsp;&nbsp;console.log("Hello!");<br>}<br><br>// Calling the function<br>greet();</code>
+                </div>
+            </div>
+            
+            <div class="function-slide">
+                <h3>Function Parameters</h3>
+                <p>Function parameters are used to provide additional information to a function, allowing it to perform tasks based on the values passed to it.</p>
+                <div class="code-block">
+                    <code>function greet(name) {<br>&nbsp;&nbsp;console.log("Hello, " + name + "!");<br>}</code>
+                </div>
+            </div>
+            
+            <div class="function-slide">
+                <h3>Calling a Function with Parameters</h3>
+                <p>When a function has parameters, we need to provide arguments when calling it to pass the necessary information.</p>
+                <div class="code-block">
+                    <code>function greet(name) {<br>&nbsp;&nbsp;console.log("Hello, " + name + "!");<br>}<br><br>// Calling with argument<br>greet("John");</code>
+                </div>
+            </div>
+            
+            <div class="function-slide">
+                <h3>Parameters vs Arguments</h3>
+                <div class="parameter-example">
+                    <div class="parameter-box">
+                        <h4>Parameters</h4>
+                        <p>Variables defined in the function declaration to accept values.</p>
+                        <div class="code-block">
+                            <code>function add(a, b) {<br>&nbsp;&nbsp;return a + b;<br>}</code>
+                        </div>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon">🔄</div>
-                        <h3>Event Handling</h3>
-                        <p>JavaScript responds to user interactions like clicks, keypresses, and form submissions to create responsive, interactive experiences.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">📡</div>
-                        <h3>Asynchronous Operations</h3>
-                        <p>With AJAX and Fetch API, JavaScript can retrieve data from servers in the background without interrupting the user experience.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">💾</div>
-                        <h3>Client-Side Storage</h3>
-                        <p>JavaScript can store data locally in the browser using localStorage, sessionStorage, or IndexedDB for offline functionality.</p>
+                    <div class="parameter-box">
+                        <h4>Arguments</h4>
+                        <p>The actual values passed to the function when called.</p>
+                        <div class="code-block">
+                            <code>add(5, 3); // 5 and 3 are arguments</code>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="card">
-                <h2>Enhancing User Experience</h2>
-                <p>JavaScript transforms static web pages into dynamic applications by:</p>
-                <ul>
-                    <li>Providing immediate feedback to user actions</li>
-                    <li>Validating form inputs in real-time</li>
-                    <li>Creating smooth animations and visual effects</li>
-                    <li>Loading content dynamically without page refreshes</li>
-                    <li>Remembering user preferences and data</li>
-                </ul>
+            <div class="function-slide">
+                <h3>Conclusion</h3>
+                <p>Functions are essential building blocks in JavaScript that help organize code, reduce repetition, and make programs more modular and maintainable.</p>
+                <div class="divider"></div>
+                <p style="text-align: center; font-style: italic;">Thank you for learning about JavaScript functions with Group 3!</p>
             </div>
         </section>
 
@@ -506,11 +656,11 @@
                 <h2>JavaScript Function Demonstrations</h2>
 
                 <div class="tabs">
-                    <button class="tab-btn active" onclick="showTab('calc')"><i class="lucide-calculator"></i>Calculator</button>
-                    <button class="tab-btn" onclick="showTab('grade')"><i class="lucide-book"></i>Grades</button>
-                    <button class="tab-btn" onclick="showTab('temp')"><i class="lucide-thermometer"></i>Temperature</button>
-                    <button class="tab-btn" onclick="showTab('bmi')"><i class="lucide-activity"></i>BMI</button>
-                    <button class="tab-btn" onclick="showTab('evenodd')"><i class="lucide-hash"></i>Even/Odd</button>
+                    <button class="tab-btn active" data-tab="calc"><i class="lucide-calculator"></i>Calculator</button>
+                    <button class="tab-btn" data-tab="grade"><i class="lucide-book"></i>Grades</button>
+                    <button class="tab-btn" data-tab="temp"><i class="lucide-thermometer"></i>Temperature</button>
+                    <button class="tab-btn" data-tab="bmi"><i class="lucide-activity"></i>BMI</button>
+                    <button class="tab-btn" data-tab="evenodd"><i class="lucide-hash"></i>Even/Odd</button>
                 </div>
 
                 <!-- Calculator -->
@@ -586,6 +736,19 @@
                         <div class="app-content">
                             <h3>Trello</h3>
                             <p>A project management application that uses JavaScript for its interactive boards, drag-and-drop functionality, and real-time updates.</p>
+                            
+                            <div class="js-explanation">
+                                <h4>JavaScript Importance:</h4>
+                                <p>Trello relies heavily on JavaScript for its interactive drag-and-drop interface, real-time updates across devices, and dynamic card management. Without JavaScript, Trello would be a static page unable to respond to user interactions.</p>
+                                
+                                <div class="example-syntax">
+                                    <h5>Example JavaScript Code:</h5>
+                                    <div class="code-block">
+                                        <code>// Drag and drop functionality in Trello<br>function allowDrop(ev) {<br>&nbsp;&nbsp;ev.preventDefault();<br>}<br><br>function drag(ev) {<br>&nbsp;&nbsp;ev.dataTransfer.setData("text", ev.target.id);<br>}<br><br>function drop(ev) {<br>&nbsp;&nbsp;ev.preventDefault();<br>&nbsp;&nbsp;var data = ev.dataTransfer.getData("text");<br>&nbsp;&nbsp;ev.target.appendChild(document.getElementById(data));<br>}<br><br>// Real-time updates using WebSockets<br>const socket = new WebSocket('ws://trello-updates');<br>socket.onmessage = function(event) {<br>&nbsp;&nbsp;updateBoard(JSON.parse(event.data));<br>};</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <a href="https://trello.com" target="_blank" class="app-link">Visit Trello</a>
                         </div>
                     </div>
@@ -595,6 +758,19 @@
                         <div class="app-content">
                             <h3>Netflix</h3>
                             <p>The streaming service uses JavaScript for its dynamic interface, content recommendations, and seamless video playback controls.</p>
+                            
+                            <div class="js-explanation">
+                                <h4>JavaScript Importance:</h4>
+                                <p>Netflix uses JavaScript to create a seamless, app-like experience in the browser. It handles video playback controls, dynamic content loading, personalized recommendations, and the entire user interface without requiring page refreshes.</p>
+                                
+                                <div class="example-syntax">
+                                    <h5>Example JavaScript Code:</h5>
+                                    <div class="code-block">
+                                        <code>// Video player controls<br>const video = document.getElementById('netflix-player');<br><br>function playPause() {<br>&nbsp;&nbsp;if (video.paused) {<br>&nbsp;&nbsp;&nbsp;&nbsp;video.play();<br>&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;video.pause();<br>&nbsp;&nbsp;}<br>}<br><br>// Dynamic content loading<br>function loadMoreContent(category) {<br>&nbsp;&nbsp;fetch(`/api/content/${category}`)<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(response => response.json())<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(data => renderContent(data));<br>}<br><br>// Personalized recommendations<br>function getRecommendations(userId) {<br>&nbsp;&nbsp;return fetch(`/api/recommendations/${userId}`)<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(response => response.json());<br>}</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <a href="https://netflix.com" target="_blank" class="app-link">Visit Netflix</a>
                         </div>
                     </div>
@@ -604,6 +780,19 @@
                         <div class="app-content">
                             <h3>Google Maps</h3>
                             <p>This mapping service relies on JavaScript for interactive maps, route calculations, and location-based services.</p>
+                            
+                            <div class="js-explanation">
+                                <h4>JavaScript Importance:</h4>
+                                <p>Google Maps is built almost entirely with JavaScript. It handles map rendering, user interactions (zooming, panning), route calculations, location markers, and real-time traffic updates. The entire interactive experience depends on JavaScript.</p>
+                                
+                                <div class="example-syntax">
+                                    <h5>Example JavaScript Code:</h5>
+                                    <div class="code-block">
+                                        <code>// Initialize and display the map<br>function initMap() {<br>&nbsp;&nbsp;const map = new google.maps.Map(document.getElementById('map'), {<br>&nbsp;&nbsp;&nbsp;&nbsp;center: {lat: 40.7128, lng: -74.0060}, // New York<br>&nbsp;&nbsp;&nbsp;&nbsp;zoom: 12<br>&nbsp;&nbsp;});<br><br>&nbsp;&nbsp;// Add a marker<br>&nbsp;&nbsp;const marker = new google.maps.Marker({<br>&nbsp;&nbsp;&nbsp;&nbsp;position: {lat: 40.7128, lng: -74.0060},<br>&nbsp;&nbsp;&nbsp;&nbsp;map: map,<br>&nbsp;&nbsp;&nbsp;&nbsp;title: 'New York City'<br>&nbsp;&nbsp;});<br>}<br><br>// Calculate route between two points<br>function calculateRoute(start, end) {<br>&nbsp;&nbsp;const directionsService = new google.maps.DirectionsService();<br>&nbsp;&nbsp;directionsService.route({<br>&nbsp;&nbsp;&nbsp;&nbsp;origin: start,<br>&nbsp;&nbsp;&nbsp;&nbsp;destination: end,<br>&nbsp;&nbsp;&nbsp;&nbsp;travelMode: 'DRIVING'<br>&nbsp;&nbsp;}, (response, status) => {<br>&nbsp;&nbsp;&nbsp;&nbsp;if (status === 'OK') {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;displayRoute(response);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;});<br>}</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <a href="https://maps.google.com" target="_blank" class="app-link">Visit Google Maps</a>
                         </div>
                     </div>
@@ -614,7 +803,7 @@
 
     <footer>
         <div class="container">
-            <p>© 2025 Group 3 | JavaScript Showcase | Colegio de Montalban</p>
+            <p>© 2025 Group 3 | JavaScript Functions | Colegio de Montalban</p>
         </div>
     </footer>
 
@@ -623,6 +812,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section');
+            const tabButtons = document.querySelectorAll('.tab-btn');
             
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -642,6 +832,14 @@
                 });
             });
             
+            // Tab functionality for mini projects
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    showTab(tabId);
+                });
+            });
+            
             // Initialize the mini projects
             initMiniProjects();
         });
@@ -651,7 +849,7 @@
             document.querySelectorAll('.mini-project-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            event.target.closest('button').classList.add('active');
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
         }
 
         // Initialize Mini Projects
@@ -659,22 +857,42 @@
             // Calculator Functions
             window.add = function() {
                 let [a, b] = getValues();
-                document.getElementById("result1").innerHTML = "Sum: " + (a + b);
+                if (isNaN(a) || isNaN(b)) {
+                    document.getElementById("result1").innerHTML = "Please enter valid numbers";
+                    return;
+                }
+                document.getElementById("result1").innerHTML = `Sum: ${a + b}`;
             }
             
             window.subtract = function() {
                 let [a, b] = getValues();
-                document.getElementById("result1").innerHTML = "Difference: " + (a - b);
+                if (isNaN(a) || isNaN(b)) {
+                    document.getElementById("result1").innerHTML = "Please enter valid numbers";
+                    return;
+                }
+                document.getElementById("result1").innerHTML = `Difference: ${a - b}`;
             }
             
             window.multiply = function() {
                 let [a, b] = getValues();
-                document.getElementById("result1").innerHTML = "Product: " + (a * b);
+                if (isNaN(a) || isNaN(b)) {
+                    document.getElementById("result1").innerHTML = "Please enter valid numbers";
+                    return;
+                }
+                document.getElementById("result1").innerHTML = `Product: ${a * b}`;
             }
             
             window.divide = function() {
                 let [a, b] = getValues();
-                document.getElementById("result1").innerHTML = b !== 0 ? "Quotient: " + (a / b) : "Cannot divide by zero!";
+                if (isNaN(a) || isNaN(b)) {
+                    document.getElementById("result1").innerHTML = "Please enter valid numbers";
+                    return;
+                }
+                if (b === 0) {
+                    document.getElementById("result1").innerHTML = "Cannot divide by zero!";
+                    return;
+                }
+                document.getElementById("result1").innerHTML = `Quotient: ${(a / b).toFixed(2)}`;
             }
             
             function getValues() {
@@ -687,10 +905,18 @@
                 let p = parseFloat(document.getElementById("prelim").value);
                 let m = parseFloat(document.getElementById("midterm").value);
                 let f = parseFloat(document.getElementById("final").value);
+                
                 if (isNaN(p) || isNaN(m) || isNaN(f)) {
-                    document.getElementById("result2").innerHTML = "Please fill all fields.";
+                    document.getElementById("result2").innerHTML = "Please fill all fields with valid numbers.";
                     return;
                 }
+                
+                // Validate grade range (0-100)
+                if (p < 0 || p > 100 || m < 0 || m > 100 || f < 0 || f > 100) {
+                    document.getElementById("result2").innerHTML = "Please enter grades between 0 and 100.";
+                    return;
+                }
+                
                 let avg = (p + m + f) / 3;
                 let remarks = avg >= 75 ? "PASSED ✅" : "FAILED ❌";
                 document.getElementById("result2").innerHTML = `Average: ${avg.toFixed(2)}<br>Remarks: ${remarks}`;
@@ -700,10 +926,12 @@
             window.convertTemp = function() {
                 let temp = parseFloat(document.getElementById("tempValue").value);
                 let unit = document.getElementById("unit").value;
+                
                 if (isNaN(temp)) {
-                    document.getElementById("result3").innerHTML = "Please enter a temperature.";
+                    document.getElementById("result3").innerHTML = "Please enter a valid temperature.";
                     return;
                 }
+                
                 let result = "";
                 if (unit === "C") {
                     result = `${temp}°C = ${(temp * 9/5 + 32).toFixed(2)}°F = ${(temp + 273.15).toFixed(2)}K`;
@@ -719,30 +947,44 @@
             window.calculateBMI = function() {
                 let w = parseFloat(document.getElementById("weight").value);
                 let h = parseFloat(document.getElementById("height").value);
+                
                 if (isNaN(w) || isNaN(h) || h <= 0) {
                     document.getElementById("result4").innerHTML = "Enter valid weight and height.";
                     return;
                 }
+                
+                // Convert height to meters if needed (assuming input is in meters)
                 let bmi = w / (h * h);
                 let category = "";
+                
                 if (bmi < 18.5) category = "Underweight";
                 else if (bmi < 25) category = "Normal";
                 else if (bmi < 30) category = "Overweight";
                 else category = "Obese";
-                document.getElementById("result4").innerHTML = `BMI: ${bmi.toFixed(2)} (${category})`;
+                
+                document.getElementById("result4").innerHTML = `BMI: ${bmi.toFixed(2)}<br>Category: ${category}`;
             }
 
             // Even or Odd
             window.checkEvenOdd = function() {
-                let num = parseInt(document.getElementById("num").value);
+                let num = parseFloat(document.getElementById("num").value);
+                
                 if (isNaN(num)) {
-                    document.getElementById("result5").innerHTML = "Please enter a number.";
+                    document.getElementById("result5").innerHTML = "Please enter a valid number.";
                     return;
                 }
-                let result = num % 2 === 0 ? "Even Number" : "Odd Number";
+                
+                // Check if it's a whole number
+                if (num % 1 !== 0) {
+                    document.getElementById("result5").innerHTML = "Please enter a whole number.";
+                    return;
+                }
+                
+                let result = num % 2 === 0 ? "Even Number ✅" : "Odd Number 🔄";
                 document.getElementById("result5").innerHTML = result;
             }
         }
     </script>
 </body>
 </html>
+
