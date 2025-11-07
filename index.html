@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Functions | Group 3</title>
-    <link rel="icon" type="image/png" href="cdm_logo.png">
-    <link href="https://unpkg.com/lucide-static/font/lucide.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #000000;
             --secondary: #ffffff;
-            --accent: #888888;
+            --accent: #333333;
             --light-gray: #f5f5f5;
             --medium-gray: #e0e0e0;
-            --dark-gray: #333333;
+            --dark-gray: #555555;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
@@ -34,8 +33,8 @@
         /* Header Styles */
         header {
             background-color: var(--secondary);
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.2rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -56,25 +55,27 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
-        .logo img {
-            width: 60px;
-            height: 60px;
+        .logo-icon {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            filter: grayscale(100%);
-            transition: filter 0.3s ease;
-        }
-        
-        .logo:hover img {
-            filter: grayscale(0%);
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         
         .logo-text {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: -1px;
+            color: var(--primary);
         }
         
         .nav-links {
@@ -96,10 +97,10 @@
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
+            height: 3px;
             bottom: 0;
             left: 0;
-            background-color: var(--primary);
+            background: var(--primary);
             transition: width 0.3s ease;
         }
         
@@ -107,11 +108,59 @@
             width: 100%;
         }
         
+        /* Main Content Styles */
+        main {
+            padding: 2rem 0;
+        }
+        
+        .main-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .main-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .main-header .subtitle {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+        }
+        
+        /* PPT Button */
+        .ppt-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ppt-button:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
         /* Section Styles */
         section {
             padding: 3rem 0;
             display: none;
-            min-height: 80vh;
         }
         
         section.active {
@@ -124,24 +173,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        h1, h2, h3 {
+        h2 {
+            font-size: 2.2rem;
+            letter-spacing: -1px;
             margin-bottom: 1.5rem;
             font-weight: 700;
         }
         
-        h1 {
-            font-size: 3.5rem;
-            letter-spacing: -2px;
-            line-height: 1.1;
-        }
-        
-        h2 {
-            font-size: 2.5rem;
-            letter-spacing: -1px;
-        }
-        
         h3 {
             font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
         
         .section-header {
@@ -160,7 +201,7 @@
         .card {
             background: var(--secondary);
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             padding: 2.5rem;
             margin-bottom: 2rem;
             border: 1px solid var(--medium-gray);
@@ -169,87 +210,7 @@
         
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        }
-        
-        /* Presentation Section */
-        .js-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .feature {
-            background: var(--secondary);
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
-            border: 1px solid var(--medium-gray);
-            transition: all 0.3s ease;
-        }
-        
-        .feature:hover {
-            border-color: var(--primary);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            padding: 1rem;
-            border-radius: 50%;
-            background-color: var(--light-gray);
-        }
-        
-        /* Function Presentation Styles */
-        .function-slide {
-            background: var(--secondary);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid var(--medium-gray);
-        }
-        
-        .function-slide h3 {
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .code-block {
-            background-color: var(--light-gray);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            border: 1px solid var(--medium-gray);
-        }
-        
-        .code-block code {
-            color: var(--dark-gray);
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        
-        .parameter-example {
-            display: flex;
-            justify-content: space-between;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .parameter-box {
-            flex: 1;
-            min-width: 200px;
-            background: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--medium-gray);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
         }
         
         /* Mini Projects Section */
@@ -257,11 +218,12 @@
             width: 100%;
             overflow: hidden;
             white-space: nowrap;
-            background: var(--light-gray);
+            background: var(--primary);
             border-radius: 8px;
             margin: 2rem 0;
             padding: 1rem 0;
-            border: 1px solid var(--medium-gray);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .banner span {
@@ -304,6 +266,7 @@
             background: var(--primary);
             color: var(--secondary);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .mini-project-content {
@@ -337,6 +300,7 @@
         input:focus, select:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
         }
 
         button {
@@ -351,6 +315,7 @@
         button:hover {
             background: var(--dark-gray);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         p.result {
@@ -458,11 +423,11 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             h3 {
@@ -470,15 +435,11 @@
             }
             
             .nav-links {
-                display: none;
+                gap: 1rem;
             }
             
             .logo-text {
-                font-size: 1.5rem;
-            }
-            
-            .mobile-menu {
-                display: block;
+                font-size: 1.3rem;
             }
             
             .tabs {
@@ -495,20 +456,8 @@
                 padding: 1.5rem;
             }
             
-            .parameter-example {
-                flex-direction: column;
-            }
-            
-            .parameter-box {
-                width: 100%;
-            }
-            
             .mini-project-content {
                 padding: 1.5rem;
-            }
-            
-            .js-features {
-                grid-template-columns: 1fr;
             }
             
             .app-grid {
@@ -526,20 +475,9 @@
         .accent-line {
             height: 4px;
             width: 60px;
-            background-color: var(--primary);
+            background: var(--primary);
             margin: 1.5rem auto;
-        }
-        
-        .group-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .group-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--dark-gray);
-            letter-spacing: 2px;
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -548,11 +486,11 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiByeD0iNTAiIGZpbGw9IiNGRkZGRkYiLz4KPHBhdGggZD0iTTM1IDM1SDUwVjUwSDM1VjM1WiIgZmlsbD0iIzAwMDAwMCIvPgo8cGF0aCBkPSJNNjUgMzVINzVWNTBINjVWMzVaIiBmaWxsPSIjMDAwMDAwIi8+CjxwYXRoIGQ9Ik0zNSA2NUg1MFY3NUgzNVY2NVoiIGZpbGw9IiMwMDAwMDAiLz4KPHBhdGggZD0iTTY1IDY1SDc1Vjc1SDY1VjY1WiIgZmlsbD0iIzAwMDAwMCIvPgo8L3N2Zz4K" alt="JS Showcase Logo">
-                    <div class="logo-text">JS Functions</div>
+                    <div class="logo-icon">JS</div>
+                    <div class="logo-text">JAVASCRIPT FUNCTION GROUP 3</div>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#" class="nav-link active" data-target="presentation">Functions</a></li>
+                    <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
                     <li><a href="#" class="nav-link" data-target="mini-project">Mini Projects</a></li>
                     <li><a href="#" class="nav-link" data-target="real-apps">Real Apps</a></li>
                 </ul>
@@ -561,88 +499,30 @@
     </header>
 
     <main class="container">
-        <section id="presentation" class="active">
-            <div class="section-header">
-                <h1>JavaScript Functions</h1>
-                <p>Understanding the building blocks of reusable code in JavaScript</p>
+        <section id="home" class="active">
+            <div class="main-header">
+                <h1>JAVASCRIPT FUNCTIONS</h1>
+                <p class="subtitle">Understanding the building blocks of reusable code in JavaScript</p>
+                
+                <!-- PPT Link Button -->
+                <a href="https://www.canva.com/design/DAG3_UVsMAo/g7GNGzrLzgAYzIyDlYyIAw/edit?fbclid=IwY2xjawN6tKlleHRuA2FlbQIxMABicmlkETFUVFAxQ2FUcldqUXU1NXY2c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuj5NB-C2yF5W85cT7jbW0aEWFJEDajSkmN5pxMg6T8iymhduykonU1sJHVU_aem_IJUm_DaWW18IIsbtZ2vzJw" 
+                   class="ppt-button" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> View PowerPoint Presentation
+                </a>
+                
                 <div class="accent-line"></div>
             </div>
             
-            <div class="group-header">
-                <div class="group-name">GROUP 3</div>
-            </div>
-            
-            <div class="function-slide">
-                <h3>What is a Function?</h3>
-                <p>A function in JavaScript is a reusable block of code that performs a specific task when needed.</p>
-                <div class="code-block">
-                    <code>function greet() {<br>&nbsp;&nbsp;console.log("Hello, World!");<br>}</code>
-                </div>
-            </div>
-            
-            <div class="function-slide">
-                <h3>Declaring a Function</h3>
-                <p>A function in JavaScript is defined by declaring a block of reusable code with the function keyword.</p>
-                <div class="code-block">
-                    <code>function functionName() {<br>&nbsp;&nbsp;// Code to be executed<br>}</code>
-                </div>
-            </div>
-            
-            <div class="function-slide">
-                <h3>Calling a Function</h3>
-                <p>Functions don't execute automatically. You need to call (invoke) them to run the code inside.</p>
-                <div class="code-block">
-                    <code>function greet() {<br>&nbsp;&nbsp;console.log("Hello!");<br>}<br><br>// Calling the function<br>greet();</code>
-                </div>
-            </div>
-            
-            <div class="function-slide">
-                <h3>Function Parameters</h3>
-                <p>Function parameters are used to provide additional information to a function, allowing it to perform tasks based on the values passed to it.</p>
-                <div class="code-block">
-                    <code>function greet(name) {<br>&nbsp;&nbsp;console.log("Hello, " + name + "!");<br>}</code>
-                </div>
-            </div>
-            
-            <div class="function-slide">
-                <h3>Calling a Function with Parameters</h3>
-                <p>When a function has parameters, we need to provide arguments when calling it to pass the necessary information.</p>
-                <div class="code-block">
-                    <code>function greet(name) {<br>&nbsp;&nbsp;console.log("Hello, " + name + "!");<br>}<br><br>// Calling with argument<br>greet("John");</code>
-                </div>
-            </div>
-            
-            <div class="function-slide">
-                <h3>Parameters vs Arguments</h3>
-                <div class="parameter-example">
-                    <div class="parameter-box">
-                        <h4>Parameters</h4>
-                        <p>Variables defined in the function declaration to accept values.</p>
-                        <div class="code-block">
-                            <code>function add(a, b) {<br>&nbsp;&nbsp;return a + b;<br>}</code>
-                        </div>
-                    </div>
-                    <div class="parameter-box">
-                        <h4>Arguments</h4>
-                        <p>The actual values passed to the function when called.</p>
-                        <div class="code-block">
-                            <code>add(5, 3); // 5 and 3 are arguments</code>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="function-slide">
-                <h3>Conclusion</h3>
-                <p>Functions are essential building blocks in JavaScript that help organize code, reduce repetition, and make programs more modular and maintainable.</p>
-                <div class="divider"></div>
-                <p style="text-align: center; font-style: italic;">Thank you for learning about JavaScript functions with Group 3!</p>
+            <div class="card">
+                <h2>Welcome to Our JavaScript Functions Presentation</h2>
+                <p>This interactive presentation showcases the power and versatility of JavaScript functions through practical examples and real-world applications.</p>
+                <p>Use the navigation above to explore our mini projects and see how JavaScript functions power popular web applications.</p>
             </div>
         </section>
 
         <section id="mini-project">
             <div class="section-header">
-                <h1>Interactive Mini Projects</h1>
+                <h2>Interactive Mini Projects</h2>
                 <p>Explore these JavaScript-powered applications created by Group 3</p>
                 <div class="accent-line"></div>
             </div>
@@ -650,17 +530,17 @@
             <div class="card">
                 <!-- Animated Banner -->
                 <div class="banner">
-                    <span>✨ GROUP 3 — FUNCTION MINI PROJECT ✨ | Colegio de Montalban | BSIT 2B 2nd Year </span>
+                    <span>✨ GROUP 3 — FUNCTION MINI PROJECT ✨ | JavaScript Functions | Interactive Examples </span>
                 </div>
 
-                <h2>JavaScript Function Demonstrations</h2>
+                <h3>JavaScript Function Demonstrations</h3>
 
                 <div class="tabs">
-                    <button class="tab-btn active" data-tab="calc"><i class="lucide-calculator"></i>Calculator</button>
-                    <button class="tab-btn" data-tab="grade"><i class="lucide-book"></i>Grades</button>
-                    <button class="tab-btn" data-tab="temp"><i class="lucide-thermometer"></i>Temperature</button>
-                    <button class="tab-btn" data-tab="bmi"><i class="lucide-activity"></i>BMI</button>
-                    <button class="tab-btn" data-tab="evenodd"><i class="lucide-hash"></i>Even/Odd</button>
+                    <button class="tab-btn active" data-tab="calc"><i class="fas fa-calculator"></i>Calculator</button>
+                    <button class="tab-btn" data-tab="grade"><i class="fas fa-book"></i>Grades</button>
+                    <button class="tab-btn" data-tab="temp"><i class="fas fa-thermometer-half"></i>Temperature</button>
+                    <button class="tab-btn" data-tab="bmi"><i class="fas fa-weight"></i>BMI</button>
+                    <button class="tab-btn" data-tab="evenodd"><i class="fas fa-sort-amount-up"></i>Even/Odd</button>
                 </div>
 
                 <!-- Calculator -->
@@ -721,18 +601,18 @@
 
         <section id="real-apps">
             <div class="section-header">
-                <h1>Real-World JavaScript Applications</h1>
+                <h2>Real-World JavaScript Applications</h2>
                 <p>Discover how JavaScript powers some of the most popular web applications today</p>
                 <div class="accent-line"></div>
             </div>
             
             <div class="card">
-                <h2>Industry-Leading Web Applications</h2>
+                <h3>Industry-Leading Web Applications</h3>
                 <p>These popular platforms rely heavily on JavaScript for their core functionality and user experience:</p>
                 
                 <div class="app-grid">
                     <div class="app-card">
-                        <div class="app-image" style="background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*_6M2nk6e_1N7dAYvwET8fg.png');"></div>
+                        <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
                         <div class="app-content">
                             <h3>Trello</h3>
                             <p>A project management application that uses JavaScript for its interactive boards, drag-and-drop functionality, and real-time updates.</p>
@@ -744,7 +624,7 @@
                                 <div class="example-syntax">
                                     <h5>Example JavaScript Code:</h5>
                                     <div class="code-block">
-                                        <code>// Drag and drop functionality in Trello<br>function allowDrop(ev) {<br>&nbsp;&nbsp;ev.preventDefault();<br>}<br><br>function drag(ev) {<br>&nbsp;&nbsp;ev.dataTransfer.setData("text", ev.target.id);<br>}<br><br>function drop(ev) {<br>&nbsp;&nbsp;ev.preventDefault();<br>&nbsp;&nbsp;var data = ev.dataTransfer.getData("text");<br>&nbsp;&nbsp;ev.target.appendChild(document.getElementById(data));<br>}<br><br>// Real-time updates using WebSockets<br>const socket = new WebSocket('ws://trello-updates');<br>socket.onmessage = function(event) {<br>&nbsp;&nbsp;updateBoard(JSON.parse(event.data));<br>};</code>
+                                        <code>// Drag and drop functionality in Trello<br>function allowDrop(ev) {<br>&nbsp;&nbsp;ev.preventDefault();<br>}<br><br>function drag(ev) {<br>&nbsp;&nbsp;ev.dataTransfer.setData("text", ev.target.id);<br>}<br><br>function drop(ev) {<br>&nbsp;&nbsp;ev.preventDefault();<br>&nbsp;&nbsp;var data = ev.dataTransfer.getData("text");<br>&nbsp;&nbsp;ev.target.appendChild(document.getElementById(data));<br>}</code>
                                     </div>
                                 </div>
                             </div>
@@ -754,7 +634,7 @@
                     </div>
                     
                     <div class="app-card">
-                        <div class="app-image" style="background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*U9hP5HhWTPM0vzKZR2S7aA.png');"></div>
+                        <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
                         <div class="app-content">
                             <h3>Netflix</h3>
                             <p>The streaming service uses JavaScript for its dynamic interface, content recommendations, and seamless video playback controls.</p>
@@ -766,7 +646,7 @@
                                 <div class="example-syntax">
                                     <h5>Example JavaScript Code:</h5>
                                     <div class="code-block">
-                                        <code>// Video player controls<br>const video = document.getElementById('netflix-player');<br><br>function playPause() {<br>&nbsp;&nbsp;if (video.paused) {<br>&nbsp;&nbsp;&nbsp;&nbsp;video.play();<br>&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;video.pause();<br>&nbsp;&nbsp;}<br>}<br><br>// Dynamic content loading<br>function loadMoreContent(category) {<br>&nbsp;&nbsp;fetch(`/api/content/${category}`)<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(response => response.json())<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(data => renderContent(data));<br>}<br><br>// Personalized recommendations<br>function getRecommendations(userId) {<br>&nbsp;&nbsp;return fetch(`/api/recommendations/${userId}`)<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(response => response.json());<br>}</code>
+                                        <code>// Video player controls<br>const video = document.getElementById('netflix-player');<br><br>function playPause() {<br>&nbsp;&nbsp;if (video.paused) {<br>&nbsp;&nbsp;&nbsp;&nbsp;video.play();<br>&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;video.pause();<br>&nbsp;&nbsp;}<br>}<br><br>// Dynamic content loading<br>function loadMoreContent(category) {<br>&nbsp;&nbsp;fetch(`/api/content/${category}`)<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(response => response.json())<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(data => renderContent(data));<br>}</code>
                                     </div>
                                 </div>
                             </div>
@@ -776,7 +656,7 @@
                     </div>
                     
                     <div class="app-card">
-                        <div class="app-image" style="background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*5TZq6pK_4JkHlB8z3Q2Q2A.png');"></div>
+                        <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1581093458791-8a6c6d2f9c7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
                         <div class="app-content">
                             <h3>Google Maps</h3>
                             <p>This mapping service relies on JavaScript for interactive maps, route calculations, and location-based services.</p>
@@ -788,7 +668,7 @@
                                 <div class="example-syntax">
                                     <h5>Example JavaScript Code:</h5>
                                     <div class="code-block">
-                                        <code>// Initialize and display the map<br>function initMap() {<br>&nbsp;&nbsp;const map = new google.maps.Map(document.getElementById('map'), {<br>&nbsp;&nbsp;&nbsp;&nbsp;center: {lat: 40.7128, lng: -74.0060}, // New York<br>&nbsp;&nbsp;&nbsp;&nbsp;zoom: 12<br>&nbsp;&nbsp;});<br><br>&nbsp;&nbsp;// Add a marker<br>&nbsp;&nbsp;const marker = new google.maps.Marker({<br>&nbsp;&nbsp;&nbsp;&nbsp;position: {lat: 40.7128, lng: -74.0060},<br>&nbsp;&nbsp;&nbsp;&nbsp;map: map,<br>&nbsp;&nbsp;&nbsp;&nbsp;title: 'New York City'<br>&nbsp;&nbsp;});<br>}<br><br>// Calculate route between two points<br>function calculateRoute(start, end) {<br>&nbsp;&nbsp;const directionsService = new google.maps.DirectionsService();<br>&nbsp;&nbsp;directionsService.route({<br>&nbsp;&nbsp;&nbsp;&nbsp;origin: start,<br>&nbsp;&nbsp;&nbsp;&nbsp;destination: end,<br>&nbsp;&nbsp;&nbsp;&nbsp;travelMode: 'DRIVING'<br>&nbsp;&nbsp;}, (response, status) => {<br>&nbsp;&nbsp;&nbsp;&nbsp;if (status === 'OK') {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;displayRoute(response);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;});<br>}</code>
+                                        <code>// Initialize and display the map<br>function initMap() {<br>&nbsp;&nbsp;const map = new google.maps.Map(document.getElementById('map'), {<br>&nbsp;&nbsp;&nbsp;&nbsp;center: {lat: 40.7128, lng: -74.0060}, // New York<br>&nbsp;&nbsp;&nbsp;&nbsp;zoom: 12<br>&nbsp;&nbsp;});<br><br>&nbsp;&nbsp;// Add a marker<br>&nbsp;&nbsp;const marker = new google.maps.Marker({<br>&nbsp;&nbsp;&nbsp;&nbsp;position: {lat: 40.7128, lng: -74.0060},<br>&nbsp;&nbsp;&nbsp;&nbsp;map: map,<br>&nbsp;&nbsp;&nbsp;&nbsp;title: 'New York City'<br>&nbsp;&nbsp;});<br>}</code>
                                     </div>
                                 </div>
                             </div>
@@ -803,7 +683,7 @@
 
     <footer>
         <div class="container">
-            <p>© 2025 Group 3 | JavaScript Functions | Colegio de Montalban</p>
+            <p>© 2023 Group 3 | JavaScript Functions Presentation</p>
         </div>
     </footer>
 
@@ -987,4 +867,3 @@
     </script>
 </body>
 </html>
-
