@@ -13,6 +13,9 @@
             --light-gray: #f5f5f5;
             --medium-gray: #e0e0e0;
             --dark-gray: #555555;
+            --trello-blue: #026AA7;
+            --netflix-red: #E50914;
+            --maps-green: #34A853;
         }
         
         * {
@@ -332,34 +335,75 @@
             flex-direction: column;
         }
         
-        /* Real Apps Section */
+        /* Real Apps Section - Enhanced */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
             margin-top: 2rem;
         }
         
         .app-card {
             background: var(--secondary);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
             border: 1px solid var(--medium-gray);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .app-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .app-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--medium-gray);
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .app-icon.trello {
+            background: var(--trello-blue);
+        }
+        
+        .app-icon.netflix {
+            background: var(--netflix-red);
+        }
+        
+        .app-icon.maps {
+            background: var(--maps-green);
+        }
+        
+        .app-title {
+            font-size: 1.4rem;
+            font-weight: 700;
         }
         
         .app-image {
-            height: 200px;
+            height: 180px;
             background-size: cover;
             background-position: center;
-            filter: grayscale(100%);
+            filter: grayscale(30%);
             transition: filter 0.5s ease;
+            position: relative;
         }
         
         .app-card:hover .app-image {
@@ -368,11 +412,99 @@
         
         .app-content {
             padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-description {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .js-explanation {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            flex-grow: 1;
+        }
+        
+        .js-explanation h4 {
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .js-explanation h4 i {
+            color: var(--dark-gray);
+        }
+        
+        .importance-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .importance-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .importance-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .example-syntax {
+            margin-top: 1.5rem;
+        }
+        
+        .example-syntax h5 {
+            margin-bottom: 0.8rem;
+            color: var(--dark-gray);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .code-block {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            border: 1px solid var(--medium-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .code-block code {
+            color: var(--dark-gray);
+        }
+        
+        .app-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--medium-gray);
         }
         
         .app-link {
-            display: inline-block;
-            margin-top: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 0.7rem 1.5rem;
             background-color: var(--primary);
             color: var(--secondary);
@@ -385,30 +517,22 @@
         .app-link:hover {
             background-color: var(--dark-gray);
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
-        /* Enhanced Real Apps Styling */
-        .js-explanation {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background-color: var(--light-gray);
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
+        .tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         
-        .js-explanation h4 {
-            margin-bottom: 0.8rem;
-            color: var(--primary);
-        }
-        
-        .example-syntax {
-            margin-top: 1.5rem;
-        }
-        
-        .example-syntax h5 {
-            margin-bottom: 0.8rem;
+        .tech-tag {
+            background: var(--light-gray);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             color: var(--dark-gray);
-            font-weight: 600;
+            border: 1px solid var(--medium-gray);
         }
         
         /* Footer */
@@ -463,6 +587,16 @@
             .app-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .app-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .tech-tags {
+                width: 100%;
+            }
         }
         
         /* Decorative Elements */
@@ -478,6 +612,40 @@
             background: var(--primary);
             margin: 1.5rem auto;
             border-radius: 2px;
+        }
+        
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
         }
     </style>
 </head>
@@ -499,6 +667,7 @@
     </header>
 
     <main class="container">
+        <!-- Home Section -->
         <section id="home" class="active">
             <div class="main-header">
                 <h1>JAVASCRIPT FUNCTIONS</h1>
@@ -517,9 +686,37 @@
                 <h2>Welcome to Our JavaScript Functions Presentation</h2>
                 <p>This interactive presentation showcases the power and versatility of JavaScript functions through practical examples and real-world applications.</p>
                 <p>Use the navigation above to explore our mini projects and see how JavaScript functions power popular web applications.</p>
+                
+                <div class="divider"></div>
+                
+                <h3>What You'll Learn</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>Function Basics</h4>
+                        <p>Understand how to declare and call functions in JavaScript</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h4>Practical Examples</h4>
+                        <p>Try our interactive mini projects to see functions in action</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Real Applications</h4>
+                        <p>Discover how JavaScript powers popular web applications</p>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Mini Projects Section -->
         <section id="mini-project">
             <div class="section-header">
                 <h2>Interactive Mini Projects</h2>
@@ -599,6 +796,7 @@
             </div>
         </section>
 
+        <!-- Real Apps Section -->
         <section id="real-apps">
             <div class="section-header">
                 <h2>Real-World JavaScript Applications</h2>
@@ -606,77 +804,177 @@
                 <div class="accent-line"></div>
             </div>
             
-            <div class="card">
-                <h3>Industry-Leading Web Applications</h3>
-                <p>These popular platforms rely heavily on JavaScript for their core functionality and user experience:</p>
-                
-                <div class="app-grid">
-                    <div class="app-card">
-                        <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
-                        <div class="app-content">
-                            <h3>Trello</h3>
-                            <p>A project management application that uses JavaScript for its interactive boards, drag-and-drop functionality, and real-time updates.</p>
-                            
-                            <div class="js-explanation">
-                                <h4>JavaScript Importance:</h4>
-                                <p>Trello relies heavily on JavaScript for its interactive drag-and-drop interface, real-time updates across devices, and dynamic card management. Without JavaScript, Trello would be a static page unable to respond to user interactions.</p>
-                                
-                                <div class="example-syntax">
-                                    <h5>Example JavaScript Code:</h5>
-                                    <div class="code-block">
-                                        <code>// Drag and drop functionality in Trello<br>function allowDrop(ev) {<br>&nbsp;&nbsp;ev.preventDefault();<br>}<br><br>function drag(ev) {<br>&nbsp;&nbsp;ev.dataTransfer.setData("text", ev.target.id);<br>}<br><br>function drop(ev) {<br>&nbsp;&nbsp;ev.preventDefault();<br>&nbsp;&nbsp;var data = ev.dataTransfer.getData("text");<br>&nbsp;&nbsp;ev.target.appendChild(document.getElementById(data));<br>}</code>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <a href="https://trello.com" target="_blank" class="app-link">Visit Trello</a>
+            <div class="section-intro">
+                <p>JavaScript transforms static websites into dynamic, interactive experiences. These popular applications rely heavily on JavaScript functions for their core functionality.</p>
+            </div>
+            
+            <div class="app-grid">
+                <!-- Trello Card -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon trello">
+                            <i class="fab fa-trello"></i>
                         </div>
+                        <div class="app-title">Trello</div>
                     </div>
                     
-                    <div class="app-card">
-                        <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
-                        <div class="app-content">
-                            <h3>Netflix</h3>
-                            <p>The streaming service uses JavaScript for its dynamic interface, content recommendations, and seamless video playback controls.</p>
-                            
-                            <div class="js-explanation">
-                                <h4>JavaScript Importance:</h4>
-                                <p>Netflix uses JavaScript to create a seamless, app-like experience in the browser. It handles video playback controls, dynamic content loading, personalized recommendations, and the entire user interface without requiring page refreshes.</p>
-                                
-                                <div class="example-syntax">
-                                    <h5>Example JavaScript Code:</h5>
-                                    <div class="code-block">
-                                        <code>// Video player controls<br>const video = document.getElementById('netflix-player');<br><br>function playPause() {<br>&nbsp;&nbsp;if (video.paused) {<br>&nbsp;&nbsp;&nbsp;&nbsp;video.play();<br>&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;video.pause();<br>&nbsp;&nbsp;}<br>}<br><br>// Dynamic content loading<br>function loadMoreContent(category) {<br>&nbsp;&nbsp;fetch(`/api/content/${category}`)<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(response => response.json())<br>&nbsp;&nbsp;&nbsp;&nbsp;.then(data => renderContent(data));<br>}</code>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <a href="https://netflix.com" target="_blank" class="app-link">Visit Netflix</a>
-                        </div>
-                    </div>
+                    <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
                     
-                    <div class="app-card">
-                        <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1581093458791-8a6c6d2f9c7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
-                        <div class="app-content">
-                            <h3>Google Maps</h3>
-                            <p>This mapping service relies on JavaScript for interactive maps, route calculations, and location-based services.</p>
+                    <div class="app-content">
+                        <p class="app-description">A visual project management tool that helps teams organize tasks and collaborate effectively.</p>
+                        
+                        <div class="js-explanation">
+                            <h4><i class="fas fa-star"></i> JavaScript's Role</h4>
+                            <p>JavaScript makes Trello interactive and dynamic:</p>
+                            <ul class="importance-list">
+                                <li>Enables drag-and-drop functionality for moving cards</li>
+                                <li>Updates boards in real-time across all devices</li>
+                                <li>Handles user interactions without page reloads</li>
+                                <li>Manages card details, comments, and attachments</li>
+                            </ul>
                             
-                            <div class="js-explanation">
-                                <h4>JavaScript Importance:</h4>
-                                <p>Google Maps is built almost entirely with JavaScript. It handles map rendering, user interactions (zooming, panning), route calculations, location markers, and real-time traffic updates. The entire interactive experience depends on JavaScript.</p>
-                                
-                                <div class="example-syntax">
-                                    <h5>Example JavaScript Code:</h5>
-                                    <div class="code-block">
-                                        <code>// Initialize and display the map<br>function initMap() {<br>&nbsp;&nbsp;const map = new google.maps.Map(document.getElementById('map'), {<br>&nbsp;&nbsp;&nbsp;&nbsp;center: {lat: 40.7128, lng: -74.0060}, // New York<br>&nbsp;&nbsp;&nbsp;&nbsp;zoom: 12<br>&nbsp;&nbsp;});<br><br>&nbsp;&nbsp;// Add a marker<br>&nbsp;&nbsp;const marker = new google.maps.Marker({<br>&nbsp;&nbsp;&nbsp;&nbsp;position: {lat: 40.7128, lng: -74.0060},<br>&nbsp;&nbsp;&nbsp;&nbsp;map: map,<br>&nbsp;&nbsp;&nbsp;&nbsp;title: 'New York City'<br>&nbsp;&nbsp;});<br>}</code>
-                                    </div>
+                            <div class="example-syntax">
+                                <h5><i class="fas fa-code"></i> Example Code</h5>
+                                <div class="code-block">
+                                    <code>// Simple drag and drop implementation<br>function startDrag(cardId) {<br>  // Store the card being dragged<br>  draggedCard = cardId;<br>}<br><br>function allowDrop(column) {<br>  // Allow cards to be dropped here<br>  column.classList.add('drop-zone');<br>}<br><br>function dropCard(column) {<br>  // Move card to new column<br>  if(draggedCard) {<br>    column.appendChild(draggedCard);<br>    saveBoardState(); // Update server<br>  }<br>}</code>
                                 </div>
                             </div>
-                            
-                            <a href="https://maps.google.com" target="_blank" class="app-link">Visit Google Maps</a>
+                        </div>
+                        
+                        <div class="app-footer">
+                            <a href="https://trello.com" target="_blank" class="app-link">
+                                <i class="fas fa-external-link-alt"></i> Visit Trello
+                            </a>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Drag & Drop</span>
+                                <span class="tech-tag">Real-time</span>
+                                <span class="tech-tag">UI Updates</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Netflix Card -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon netflix">
+                            <i class="fab fa-netflix"></i>
+                        </div>
+                        <div class="app-title">Netflix</div>
+                    </div>
+                    
+                    <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
+                    
+                    <div class="app-content">
+                        <p class="app-description">The world's leading streaming entertainment service with millions of subscribers.</p>
+                        
+                        <div class="js-explanation">
+                            <h4><i class="fas fa-star"></i> JavaScript's Role</h4>
+                            <p>JavaScript creates Netflix's seamless viewing experience:</p>
+                            <ul class="importance-list">
+                                <li>Controls video playback and user interface</li>
+                                <li>Loads content dynamically without page refreshes</li>
+                                <li>Personalizes recommendations based on viewing history</li>
+                                <li>Manages user profiles and settings</li>
+                            </ul>
+                            
+                            <div class="example-syntax">
+                                <h5><i class="fas fa-code"></i> Example Code</h5>
+                                <div class="code-block">
+                                    <code>// Video player controls<br>const videoPlayer = {<br>  play: function() {<br>    videoElement.play();<br>    updatePlayButton('pause');<br>  },<br>  <br>  pause: function() {<br>    videoElement.pause();<br>    updatePlayButton('play');<br>  },<br>  <br>  skipIntro: function() {<br>    videoElement.currentTime += 90; // Skip 1.5 minutes<br>  }<br>};<br><br>// Load recommended content<br>function loadRecommendations() {<br>  fetch('/api/recommendations')<br>    .then(response => response.json())<br>    .then(showRecommendations);<br>}</code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="app-footer">
+                            <a href="https://netflix.com" target="_blank" class="app-link">
+                                <i class="fas fa-external-link-alt"></i> Visit Netflix
+                            </a>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Video Control</span>
+                                <span class="tech-tag">Dynamic Content</span>
+                                <span class="tech-tag">Personalization</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Google Maps Card -->
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-icon maps">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="app-title">Google Maps</div>
+                    </div>
+                    
+                    <div class="app-image" style="background-image: url('https://images.unsplash.com/photo-1581093458791-8a6c6d2f9c7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
+                    
+                    <div class="app-content">
+                        <p class="app-description">The world's most popular mapping service with detailed maps and navigation.</p>
+                        
+                        <div class="js-explanation">
+                            <h4><i class="fas fa-star"></i> JavaScript's Role</h4>
+                            <p>JavaScript powers Google Maps' interactive features:</p>
+                            <ul class="importance-list">
+                                <li>Renders interactive maps with zoom and pan controls</li>
+                                <li>Calculates routes and provides turn-by-turn directions</li>
+                                <li>Displays real-time traffic and transit information</li>
+                                <li>Shows points of interest and business details</li>
+                            </ul>
+                            
+                            <div class="example-syntax">
+                                <h5><i class="fas fa-code"></i> Example Code</h5>
+                                <div class="code-block">
+                                    <code>// Initialize map<br>function initMap() {<br>  const map = new google.maps.Map(<br>    document.getElementById('map'), {<br>      center: {lat: 40.7128, lng: -74.0060},<br>      zoom: 12<br>    }<br>  );<br><br>  // Add click listener<br>  map.addListener('click', function(event) {<br>    addMarker(event.latLng);<br>  });<br>}<br><br>// Calculate route<br>function calculateRoute(start, end) {<br>  const directionsService = new google.maps.DirectionsService();<br>  directionsService.route({<br>    origin: start,<br>    destination: end,<br>    travelMode: 'DRIVING'<br>  }, showRoute);<br>}</code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="app-footer">
+                            <a href="https://maps.google.com" target="_blank" class="app-link">
+                                <i class="fas fa-external-link-alt"></i> Visit Google Maps
+                            </a>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Interactive Maps</span>
+                                <span class="tech-tag">Routing</span>
+                                <span class="tech-tag">Real-time Data</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Why JavaScript Matters</h3>
+                <p>JavaScript transforms static web pages into dynamic applications. Without JavaScript, these popular apps would be limited to basic functionality:</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+                    <div>
+                        <h4>With JavaScript</h4>
+                        <ul class="importance-list">
+                            <li>Interactive user interfaces</li>
+                            <li>Real-time updates</li>
+                            <li>Dynamic content loading</li>
+                            <li>Complex user interactions</li>
+                            <li>Rich multimedia experiences</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Without JavaScript</h4>
+                        <ul class="importance-list" style="color: var(--dark-gray);">
+                            <li>Static pages only</li>
+                            <li>Full page reloads for updates</li>
+                            <li>Limited interactivity</li>
+                            <li>Basic form submissions</li>
+                            <li>No real-time features</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <p style="text-align: center; font-style: italic; margin-top: 1.5rem;">JavaScript functions are the building blocks that make these interactive experiences possible!</p>
             </div>
         </section>
     </main>
