@@ -275,7 +275,7 @@
         .mini-project-content {
             background: var(--secondary);
             width: 100%;
-            max-width: 500px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 2.5rem;
             border-radius: 12px;
@@ -333,6 +333,60 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
+        }
+        
+        /* Function Syntax Display */
+        .function-syntax {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .function-syntax h4 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+        }
+        
+        .function-syntax h4 i {
+            color: var(--dark-gray);
+        }
+        
+        .code-display {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .code-block {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            border: 1px solid var(--medium-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex: 1;
+        }
+        
+        .code-block code {
+            color: var(--dark-gray);
+        }
+        
+        .explanation {
+            flex: 1;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--medium-gray);
+            font-size: 0.95rem;
+        }
+        
+        .explanation h5 {
+            margin-bottom: 0.8rem;
+            color: var(--dark-gray);
         }
         
         /* Real Apps Section - Enhanced */
@@ -476,22 +530,6 @@
             gap: 8px;
         }
         
-        .code-block {
-            background-color: var(--light-gray);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            border: 1px solid var(--medium-gray);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .code-block code {
-            color: var(--dark-gray);
-        }
-        
         .app-footer {
             margin-top: auto;
             display: flex;
@@ -582,6 +620,10 @@
             
             .mini-project-content {
                 padding: 1.5rem;
+            }
+            
+            .code-display {
+                flex-direction: column;
             }
             
             .app-grid {
@@ -736,7 +778,6 @@
                     <button class="tab-btn active" data-tab="calc"><i class="fas fa-calculator"></i>Calculator</button>
                     <button class="tab-btn" data-tab="grade"><i class="fas fa-book"></i>Grades</button>
                     <button class="tab-btn" data-tab="temp"><i class="fas fa-thermometer-half"></i>Temperature</button>
-                    <button class="tab-btn" data-tab="bmi"><i class="fas fa-weight"></i>BMI</button>
                     <button class="tab-btn" data-tab="evenodd"><i class="fas fa-sort-amount-up"></i>Even/Odd</button>
                 </div>
 
@@ -752,6 +793,26 @@
                         <button onclick="divide()">Divide</button>
                     </div>
                     <p id="result1" class="result"></p>
+                    
+                    <div class="function-syntax">
+                        <h4><i class="fas fa-code"></i> JavaScript Functions Used</h4>
+                        <div class="code-display">
+                            <div class="code-block">
+                                <code>// Addition function<br>function add() {<br>  let a = parseFloat(document.getElementById("n1").value);<br>  let b = parseFloat(document.getElementById("n2").value);<br>  <br>  if (isNaN(a) || isNaN(b)) {<br>    document.getElementById("result1").innerHTML = "Please enter valid numbers";<br>    return;<br>  }<br>  <br>  document.getElementById("result1").innerHTML = `Sum: ${a + b}`;<br>}<br><br>// Subtraction function<br>function subtract() {<br>  let a = parseFloat(document.getElementById("n1").value);<br>  let b = parseFloat(document.getElementById("n2").value);<br>  <br>  if (isNaN(a) || isNaN(b)) {<br>    document.getElementById("result1").innerHTML = "Please enter valid numbers";<br>    return;<br>  }<br>  <br>  document.getElementById("result1").innerHTML = `Difference: ${a - b}`;<br>}</code>
+                            </div>
+                            <div class="explanation">
+                                <h5>Function Explanation</h5>
+                                <p>These calculator functions:</p>
+                                <ul>
+                                    <li>Take two input values from the user</li>
+                                    <li>Validate that both inputs are numbers</li>
+                                    <li>Perform the mathematical operation</li>
+                                    <li>Display the result to the user</li>
+                                </ul>
+                                <p>The functions demonstrate parameter-less functions that get values directly from HTML elements.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Grade Calculator -->
@@ -762,6 +823,27 @@
                     <input type="number" id="final" placeholder="Final Grade">
                     <button onclick="calculateGrade()">Compute Grade</button>
                     <p id="result2" class="result"></p>
+                    
+                    <div class="function-syntax">
+                        <h4><i class="fas fa-code"></i> JavaScript Functions Used</h4>
+                        <div class="code-display">
+                            <div class="code-block">
+                                <code>// Grade calculation function<br>function calculateGrade() {<br>  let p = parseFloat(document.getElementById("prelim").value);<br>  let m = parseFloat(document.getElementById("midterm").value);<br>  let f = parseFloat(document.getElementById("final").value);<br>  <br>  // Input validation<br>  if (isNaN(p) || isNaN(m) || isNaN(f)) {<br>    document.getElementById("result2").innerHTML = "Please fill all fields with valid numbers.";<br>    return;<br>  }<br>  <br>  // Validate grade range (0-100)<br>  if (p < 0 || p > 100 || m < 0 || m > 100 || f < 0 || f > 100) {<br>    document.getElementById("result2").innerHTML = "Please enter grades between 0 and 100.";<br>    return;<br>  }<br>  <br>  // Calculate average<br>  let avg = (p + m + f) / 3;<br>  let remarks = avg >= 75 ? "PASSED ✅" : "FAILED ❌";<br>  <br>  // Display result<br>  document.getElementById("result2").innerHTML = `Average: ${avg.toFixed(2)}<br>Remarks: ${remarks}`;<br>}</code>
+                            </div>
+                            <div class="explanation">
+                                <h5>Function Explanation</h5>
+                                <p>This grade calculation function:</p>
+                                <ul>
+                                    <li>Takes three input values (prelim, midterm, final)</li>
+                                    <li>Validates that all inputs are numbers</li>
+                                    <li>Checks if grades are within valid range (0-100)</li>
+                                    <li>Calculates the average of the three grades</li>
+                                    <li>Uses conditional (ternary) operator to determine pass/fail</li>
+                                    <li>Displays formatted result with emojis</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Temperature Converter -->
@@ -775,15 +857,27 @@
                     </select>
                     <button onclick="convertTemp()">Convert Temperature</button>
                     <p id="result3" class="result"></p>
-                </div>
-
-                <!-- BMI Calculator -->
-                <div id="bmi" class="mini-project-content">
-                    <h3>BMI Calculator</h3>
-                    <input type="number" id="weight" placeholder="Weight (kg)">
-                    <input type="number" id="height" placeholder="Height (m)">
-                    <button onclick="calculateBMI()">Calculate BMI</button>
-                    <p id="result4" class="result"></p>
+                    
+                    <div class="function-syntax">
+                        <h4><i class="fas fa-code"></i> JavaScript Functions Used</h4>
+                        <div class="code-display">
+                            <div class="code-block">
+                                <code>// Temperature conversion function<br>function convertTemp() {<br>  let temp = parseFloat(document.getElementById("tempValue").value);<br>  let unit = document.getElementById("unit").value;<br>  <br>  // Input validation<br>  if (isNaN(temp)) {<br>    document.getElementById("result3").innerHTML = "Please enter a valid temperature.";<br>    return;<br>  }<br>  <br>  let result = "";<br>  <br>  // Conversion logic based on selected unit<br>  if (unit === "C") {<br>    result = `${temp}°C = ${(temp * 9/5 + 32).toFixed(2)}°F = ${(temp + 273.15).toFixed(2)}K`;<br>  } else if (unit === "F") {<br>    result = `${temp}°F = ${((temp - 32) * 5/9).toFixed(2)}°C = ${((temp - 32) * 5/9 + 273.15).toFixed(2)}K`;<br>  } else {<br>    result = `${temp}K = ${(temp - 273.15).toFixed(2)}°C = ${((temp - 273.15) * 9/5 + 32).toFixed(2)}°F`;<br>  }<br>  <br>  document.getElementById("result3").innerHTML = result;<br>}</code>
+                            </div>
+                            <div class="explanation">
+                                <h5>Function Explanation</h5>
+                                <p>This temperature conversion function:</p>
+                                <ul>
+                                    <li>Takes temperature value and unit from user inputs</li>
+                                    <li>Validates the temperature input</li>
+                                    <li>Uses conditional statements to determine conversion formula</li>
+                                    <li>Applies mathematical formulas for temperature conversion</li>
+                                    <li>Formats the result with proper symbols and decimal places</li>
+                                    <li>Displays all three temperature scales (Celsius, Fahrenheit, Kelvin)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Even or Odd -->
@@ -792,6 +886,27 @@
                     <input type="number" id="num" placeholder="Enter a number">
                     <button onclick="checkEvenOdd()">Check Number</button>
                     <p id="result5" class="result"></p>
+                    
+                    <div class="function-syntax">
+                        <h4><i class="fas fa-code"></i> JavaScript Functions Used</h4>
+                        <div class="code-display">
+                            <div class="code-block">
+                                <code>// Even/Odd checking function<br>function checkEvenOdd() {<br>  let num = parseFloat(document.getElementById("num").value);<br>  <br>  // Input validation<br>  if (isNaN(num)) {<br>    document.getElementById("result5").innerHTML = "Please enter a valid number.";<br>    return;<br>  }<br>  <br>  // Check if it's a whole number<br>  if (num % 1 !== 0) {<br>    document.getElementById("result5").innerHTML = "Please enter a whole number.";<br>    return;<br>  }<br>  <br>  // Determine if number is even or odd<br>  let result = num % 2 === 0 ? "Even Number ✅" : "Odd Number 🔄";<br>  <br>  document.getElementById("result5").innerHTML = result;<br>}</code>
+                            </div>
+                            <div class="explanation">
+                                <h5>Function Explanation</h5>
+                                <p>This even/odd checking function:</p>
+                                <ul>
+                                    <li>Takes a number input from the user</li>
+                                    <li>Validates that the input is a number</li>
+                                    <li>Checks if it's a whole number (not decimal)</li>
+                                    <li>Uses modulus operator (%) to check divisibility by 2</li>
+                                    <li>Returns "Even" if remainder is 0, "Odd" otherwise</li>
+                                    <li>Uses emojis for visual feedback</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1119,28 +1234,6 @@
                     result = `${temp}K = ${(temp - 273.15).toFixed(2)}°C = ${((temp - 273.15) * 9/5 + 32).toFixed(2)}°F`;
                 }
                 document.getElementById("result3").innerHTML = result;
-            }
-
-            // BMI Calculator
-            window.calculateBMI = function() {
-                let w = parseFloat(document.getElementById("weight").value);
-                let h = parseFloat(document.getElementById("height").value);
-                
-                if (isNaN(w) || isNaN(h) || h <= 0) {
-                    document.getElementById("result4").innerHTML = "Enter valid weight and height.";
-                    return;
-                }
-                
-                // Convert height to meters if needed (assuming input is in meters)
-                let bmi = w / (h * h);
-                let category = "";
-                
-                if (bmi < 18.5) category = "Underweight";
-                else if (bmi < 25) category = "Normal";
-                else if (bmi < 30) category = "Overweight";
-                else category = "Obese";
-                
-                document.getElementById("result4").innerHTML = `BMI: ${bmi.toFixed(2)}<br>Category: ${category}`;
             }
 
             // Even or Odd
